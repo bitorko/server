@@ -17,7 +17,6 @@ function up(knex) {
       table.increments('id').primary();
       table.integer('tournament_id').unsigned().references('id').inTable('tournament');
       table.integer('motion_type_id').unsigned().references('id').inTable('motion_type');
-      table.string('name');
       table.integer('number');
       table.integer('teams');
       table.integer('adjudicators');
@@ -28,10 +27,11 @@ function up(knex) {
       table.increments('id').primary();
       table.integer('host_id').unsigned().references('id').inTable('institution');
       table.string('title');
-      table.integer('rounds');
-      table.text('descriptions');
+      table.text('description');
       table.string('poster');
-      table.date('date');
+      table.integer('rounds');
+      table.date('start_date');
+      table.date('end_date');
     })
     .createTable('room', (table) => {
       table.increments('id').primary();
@@ -45,11 +45,17 @@ function up(knex) {
       table.integer('institution_id').unsigned().references('id').inTable('institution');
       table.specificType('position', 'integer[]');
       table.string('name');
+      table.boolean('swing');
+      table.boolean('active');
     })
     .createTable('user', (table) => {
       table.increments('id').primary();
       table.integer('person_id').unsigned().references('id').inTable('person');
+      table.string('email');
+      table.string('facebook');
+      table.string('hash');
       table.string('name');
+      table.string('phone');
     })
     .createTable('tournament_adjudicator', (table) => {
       table.increments('id').primary();
@@ -61,13 +67,13 @@ function up(knex) {
       table.increments('id').primary();
       table.integer('team_id').unsigned().references('id').inTable('team');
       table.integer('person_id').unsigned().references('id').inTable('person');
-      table.string('name');
     })
     .createTable('room_adjudicator', (table) => {
       table.increments('id').primary();
       table.integer('round_id').unsigned().references('id').inTable('round');
       table.integer('person_id').unsigned().references('id').inTable('person');
       table.enu('role', ['chair', 'panelist', 'trainee']);
+      table.integer('points');
     })
     .createTable('room_debater', (table) => {
       table.increments('id').primary();
