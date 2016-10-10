@@ -26,7 +26,7 @@ function up(knex) {
     .createTable('tournament', (table) => {
       table.increments('id').primary();
       table.integer('host_id').unsigned().references('id').inTable('institution');
-      table.string('title');
+      table.string('name');
       table.text('description');
       table.string('poster');
       table.integer('rounds');
