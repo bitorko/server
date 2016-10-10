@@ -1,0 +1,104 @@
+#%RAML 0.8
+title: bitorko
+version: working draft
+baseUri: https://api.bitorko.com
+mediaType: application/json
+
+securitySchemes:
+  - token: !include securitySchema/token.raml
+
+schemas:
+  - user: !include ../api/user/user.schema.json
+  - institution: !include ../api/institution/institution.schema.json
+  - person: !include ../api/person/person.schema.json
+  - room: !include ../api/room/room.schema.json
+  - round: !include ../api/round/round.schema.json
+  - team: !include ../api/team/team.schema.json
+  - tournament: !include ../api/tournament/tournament.schema.json
+
+resourceTypes:
+  - collection: !include resourceTypes/collection.raml
+  - member: !include resourceTypes/member.raml
+traits:
+  - query: !include traits/query.raml
+
+# Users
+/users:
+  get:
+    securedBy: [ token ]
+    is: [ query ]
+    responses:
+      200:
+        body:
+          application/json:
+            schema: user
+  /{userId}:
+    type: {member:{objectType: user}}
+
+# Institution
+/institutions:
+  type: {collection: {resourceName: institution}}
+  /{institutionId}:
+    type: {member: {objectType: institution}}
+    /teams:
+      type: {collection: {resourceName: team}}
+      /{teamId}:
+        type: {member: {objectType: team}}
+
+# Person
+/persons:
+  type: {collection: {resourceName: person}}
+  /{personId}:
+    type: {member: {objectType: person}}
+    /tournaments:
+      type: {collection: {resourceName: tournament}}
+      /{tournamentId}:
+        type: {member: {objectType: tournament}}
+    /institutions:
+      type: {collection: {resourceName: institution}}
+      /{institutionId}:
+        type: {member: {objectType: institution}}
+    /teams:
+      type: {collection: {resourceName: team}}
+      /{teamId}:
+        type: {member: {objectType: team}}
+
+# Artists
+/tournaments:
+  type: {collection: {resourceName: tournament}}
+  /{tournamentId}:
+    type: {member: {objectType: tournament}}
+    /rounds:
+      type: {collection: {resourceName: round}}
+      /{roundId}:
+        type: {member: {objectType: round}}
+        /rooms:
+          type: {collection: {resourceName: room}}
+          /{roomId}:
+            type: {member: {objectType: room}}
+            /teams:
+              type: {collection: {resourceName: team}}
+              /{teamId}:
+                type: {member: {objectType: team}}
+                /members:
+                  type: {collection: {resourceName: person}}
+                  /{memberId}:
+                    type: {member: {objectType: person}}
+            /adjudicators:
+              type: {collection: {resourceName: person}}
+              /{adjudicatorId}:
+                type: {member: {objectType: person}}
+      /teams:
+        type: {collection: {resourceName: team}}
+        /{teamId}:
+          type: {member: {objectType: team}}
+          /member:
+            type: {collection: {resourceName: person}}
+            /{personId}:
+              type: {member: {objectType: person}}
+
+documentation:
+  - title: Headline
+    content: !include docs/headline.md
+  - title: Authentication
+    content: !include docs/authentication.md
