@@ -70,15 +70,9 @@ function up(knex) {
     })
     .createTable('room_adjudicator', (table) => {
       table.increments('id').primary();
-      table.integer('round_id').unsigned().references('id').inTable('round');
-      table.integer('person_id').unsigned().references('id').inTable('person');
-      table.enu('role', ['chair', 'panelist', 'trainee']);
-      table.integer('points');
-    })
-    .createTable('room_debater', (table) => {
-      table.increments('id').primary();
       table.integer('room_id').unsigned().references('id').inTable('room');
       table.integer('person_id').unsigned().references('id').inTable('person');
+      table.enu('role', ['chair', 'panelist', 'trainee']);
       table.integer('points');
     })
     .createTable('person_institution', (table) => {
@@ -92,6 +86,12 @@ function up(knex) {
       table.integer('team_id').unsigned().references('id').inTable('team');
       table.integer('points');
       table.enu('role', ['og', 'oo', 'co', 'cg']);
+    })
+    .createTable('room_team_member', (table) => {
+      table.increments('id').primary();
+      table.integer('room_team_id').unsigned().references('id').inTable('room_team');
+      table.integer('person_id').unsigned().references('id').inTable('person');
+      table.integer('score');
     });
 }
 
@@ -99,7 +99,7 @@ function down(knex) {
   return knex.schema
     .dropTableIfExists('room_team')
     .dropTableIfExists('person_institution')
-    .dropTableIfExists('room_debater')
+    .dropTableIfExists('room_team_member')
     .dropTableIfExists('room_adjudicator')
     .dropTableIfExists('team_member')
     .dropTableIfExists('user')
