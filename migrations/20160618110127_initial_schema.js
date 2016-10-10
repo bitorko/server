@@ -13,16 +13,6 @@ function up(knex) {
       table.increments('id').primary();
       table.string('name');
     })
-    .createTable('round', (table) => {
-      table.increments('id').primary();
-      table.integer('tournament_id').unsigned().references('id').inTable('tournament');
-      table.integer('motion_type_id').unsigned().references('id').inTable('motion_type');
-      table.integer('number');
-      table.integer('teams');
-      table.integer('adjudicators');
-      table.string('motion');
-      table.text('context');
-    })
     .createTable('tournament', (table) => {
       table.increments('id').primary();
       table.integer('host_id').unsigned().references('id').inTable('institution');
@@ -32,6 +22,16 @@ function up(knex) {
       table.integer('rounds');
       table.date('start_date');
       table.date('end_date');
+    })
+    .createTable('round', (table) => {
+      table.increments('id').primary();
+      table.integer('tournament_id').unsigned().references('id').inTable('tournament');
+      table.integer('motion_type_id').unsigned().references('id').inTable('motion_type');
+      table.integer('number');
+      table.integer('teams');
+      table.integer('adjudicators');
+      table.string('motion');
+      table.text('context');
     })
     .createTable('room', (table) => {
       table.increments('id').primary();
@@ -105,8 +105,8 @@ function down(knex) {
     .dropTableIfExists('user')
     .dropTableIfExists('team')
     .dropTableIfExists('room')
-    .dropTableIfExists('tournament')
     .dropTableIfExists('round')
+    .dropTableIfExists('tournament')
     .dropTableIfExists('motion_type')
     .dropTableIfExists('person')
     .dropTableIfExists('institution');
