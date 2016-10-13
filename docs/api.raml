@@ -40,28 +40,28 @@ traits:
   type: {collection: {resourceName: institution}}
   /{institutionId}:
     type: {member: {objectType: institution}}
-    /teams:
-      type: {collection: {resourceName: team}}
-      /{teamId}:
-        type: {member: {objectType: team}}
 
 # Person
 /persons:
   type: {collection: {resourceName: person}}
   /{personId}:
     type: {member: {objectType: person}}
-    /tournaments:
-      type: {collection: {resourceName: tournament}}
-      /{tournamentId}:
-        type: {member: {objectType: tournament}}
-    /institutions:
-      type: {collection: {resourceName: institution}}
-      /{institutionId}:
-        type: {member: {objectType: institution}}
     /teams:
       type: {collection: {resourceName: team}}
       /{teamId}:
         type: {member: {objectType: team}}
+        /tournaments:
+          type: {collection: {resourceName: tournament}}
+          /{tournamentId}:
+            type: {member: {objectType: tournament}}
+            /rooms:
+              type: {collection: {resourceName: room}}
+              /{roomId}:
+                type: {member: {objectType: room}}
+    /institutions:
+      type: {collection: {resourceName: institution}}
+      /{institutionId}:
+        type: {member: {objectType: institution}}
 
 # Artists
 /tournaments:
@@ -96,6 +96,10 @@ traits:
             type: {collection: {resourceName: person}}
             /{personId}:
               type: {member: {objectType: person}}
+      /adjudicators:
+        type: {collection: {resourceName: person}}
+        /{adjudicatorId}:
+          type: {member: {objectType: person}}
 
 documentation:
   - title: Headline
