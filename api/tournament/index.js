@@ -6,6 +6,11 @@ const processQuery = require('../../components/middlewares/process-query');
 const controller = new BaseController(Tournament);
 
 const router = new express.Router();
+const roundRouter = require('../round');
+const teamRouter = require('../team');
+
+router.use('/:id/rounds', roundRouter);
+router.use('/:id/teams', teamRouter);
 
 router.get('/', processQuery, controller.index.bind(controller));
 router.get('/:id', controller.show.bind(controller));
