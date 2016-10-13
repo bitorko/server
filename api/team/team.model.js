@@ -11,7 +11,7 @@ class Team extends Model {
     return schema;
   }
 
-  static get relationshipMappings() {
+  static get relationMappings() {
     return {
       members: {
         relation: Model.ManyToManyRelation,
@@ -21,7 +21,6 @@ class Team extends Model {
           through: {
             from: 'team_member.team_id',
             to: 'team_member.member_id',
-            extra: ['role', 'points'],
           },
           to: 'person.id',
         },

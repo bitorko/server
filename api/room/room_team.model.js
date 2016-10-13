@@ -6,7 +6,7 @@ class RoomTeam extends Model {
     return 'room_team';
   }
 
-  static get relationshipMappings() {
+  static get relationMappings() {
     return {
       debaters: {
         relation: Model.HasManyRelation,

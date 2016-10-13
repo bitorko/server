@@ -11,7 +11,7 @@ class Person extends Model {
     return schema;
   }
 
-  static get relationshipMappings() {
+  static get relationMappings() {
     return {
       team: {
         relation: Model.ManyToManyRelation,

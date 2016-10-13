@@ -11,10 +11,10 @@ class Tournament extends Model {
     return schema;
   }
 
-  static get relationshipMappings() {
+  static get relationMappings() {
     return {
       rounds: {
-        relation: Model.ManyToManyRelation,
+        relation: Model.HasManyRelation,
         modelClass: path.normalize(`${__dirname}/../round/round.model`),
         join: {
           from: 'tournament.id',
@@ -22,7 +22,7 @@ class Tournament extends Model {
         },
       },
       teams: {
-        relation: Model.ManyToManyRelation,
+        relation: Model.HasManyRelation,
         modelClass: path.normalize(`${__dirname}/../team/team.model`),
         join: {
           from: 'tournament.id',

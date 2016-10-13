@@ -6,7 +6,7 @@ class RoomTeamDebater extends Model {
     return 'room_team_debater';
   }
 
-  static get relationshipMappings() {
+  static get relationMappings() {
     return {
       debater: {
         relation: Model.BelongsToOneRelation,

@@ -11,7 +11,7 @@ class Room extends Model {
     return schema;
   }
 
-  static get relationshipMappings() {
+  static get relationMappings() {
     return {
       teams: {
         relation: Model.ManyToManyRelation,

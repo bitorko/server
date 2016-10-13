@@ -11,7 +11,7 @@ class Round extends Model {
     return schema;
   }
 
-  static get relationshipMappings() {
+  static get relationMappings() {
     return {
       rooms: {
         relation: Model.HasManyRelation,
