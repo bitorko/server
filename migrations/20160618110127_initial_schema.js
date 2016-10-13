@@ -44,7 +44,7 @@ function up(knex) {
       table.string('name').notNullable();
       table.integer('tournament_id').unsigned().references('id').inTable('tournament');
       table.integer('institution_id').unsigned().references('id').inTable('institution');
-      table.specificType('position', 'integer[]');
+      table.specificType('positions', 'jsonb');
       table.boolean('swing').defaultTo(false);
       table.boolean('active').defaultTo(true);
     })
@@ -101,7 +101,7 @@ function down(knex) {
   return knex.schema
     .dropTableIfExists('room_team')
     .dropTableIfExists('person_institution')
-    .dropTableIfExists('room_team_member')
+    .dropTableIfExists('room_team_debater')
     .dropTableIfExists('room_adjudicator')
     .dropTableIfExists('team_member')
     .dropTableIfExists('tournament_adjudicator')
