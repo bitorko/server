@@ -27,7 +27,7 @@
       "format": "uri",
       "faker": "image.imageUrl"
     },
-    "rounds": {
+    "total_rounds": {
       "type": "integer",
       "minimum": 1,
       "faker": { "random.number": [{"max": 7, "min": 3}]}

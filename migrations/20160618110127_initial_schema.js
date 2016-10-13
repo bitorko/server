@@ -20,7 +20,7 @@ function up(knex) {
       table.string('name').notNullable();
       table.text('description');
       table.string('poster');
-      table.integer('rounds').notNullable();
+      table.integer('total_rounds').notNullable();
       table.date('start_date');
       table.date('end_date');
     })
