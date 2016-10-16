@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
-  "required": ["name", "host_id"],
+  "required": ["name", "host_id", "total_rounds"],
 
   "properties": {
     "host_id": {

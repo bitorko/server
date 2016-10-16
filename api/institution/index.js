@@ -1,7 +1,7 @@
 const express = require('express');
 const Institution = require('./institution.model');
 const BaseController = require('../base/base.controller');
-const processQuery = require('../../components/filters/text-search');
+const processQuery = require('../../components/middlewares/process-query');
 
 const controller = new BaseController(Institution);
 
